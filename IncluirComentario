@@ -1,0 +1,58 @@
+package br.com.avenuecode;
+
+import static org.junit.Assert.*;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+public class IncluirComentario {
+
+	@Test
+	public void test() throws InterruptedException {
+		
+		//Carregando browser chrome //
+		
+				DesiredCapabilities capacidade = DesiredCapabilities.chrome();
+				
+				capacidade.setJavascriptEnabled(true);
+				
+				System.setProperty("webdriver.chrome.driver", "C://Drivers/chromedriver.exe");
+				
+				WebDriver driver = new ChromeDriver (capacidade);
+				
+				//Acessando menu //
+				
+				driver.get("https://qadatake.wordpress.com/2018/07/12/the-journey-begins/");
+				
+				driver.findElement(By.xpath("//*[@id='post-3']/footer/span/a")).click();
+				
+				driver.findElement(By.id("comment")).click();
+				
+				driver.findElement(By.id("comment")).sendKeys("OlÃ¡ Fernando Magno");
+				
+				//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				
+				Thread.sleep(100);
+				
+				driver.findElement(By.id("author")).click();
+				
+				driver.findElement(By.id("author")).sendKeys("Fernando Magno");
+				
+				driver.findElement(By.xpath("//*[@id='email']")).click();
+				
+				driver.findElement(By.xpath("//*[@id='email']")).sendKeys("fernandomagno@outlook.com");
+				
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				
+				driver.findElement(By.id("comment-submit")).click();
+
+	}
+
+}
