@@ -1,0 +1,59 @@
+package br.com.avenuecode;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+
+public class CadastroContato {
+	
+
+	@Test 
+	public void CadastrarContato() {
+
+		DesiredCapabilities capacidade = DesiredCapabilities.chrome();
+		
+		capacidade.setJavascriptEnabled(true);
+		
+		System.setProperty("webdriver.chrome.driver", "C://Drivers/chromedriver.exe");
+		
+		WebDriver driver = new ChromeDriver (capacidade);
+		
+		driver.get("https://qadatake.wordpress.com/contact/");
+		
+		driver.manage().window().maximize();
+
+		//WebElement labelNome = driver.findElement(By.xpath("//label[@class='grunion-field-label name']"));
+		//assertTrue(labelNome.getText().contains("Name(obrigatÃ³rio)"));
+		
+		WebElement campoNome = driver.findElement(By.id("g2-name"));
+		campoNome.sendKeys("Fernando Magno");
+		
+		WebElement campoEmail = driver.findElement(By.id("g2-email"));
+		campoEmail.sendKeys("fernandomagno@outlook.com");
+		
+		WebElement campoComentario = driver.findElement(By.id("contact-form-comment-g2-comment"));
+		campoComentario.sendKeys("ComentÃ¡rio Fernando Magno");
+		
+		//Thread.sleep(2000);
+		
+		WebElement botao = driver.findElement(By.id("contact-form-2"));
+		botao.click();
+		
+		assertEquals("A mensagem foi enviada (voltar)", driver.findElement(By.xpath("//div[@id='contact-form-2']/h3")).getText());
+		
+		driver.quit();
+
+	}
+
+}
+		
